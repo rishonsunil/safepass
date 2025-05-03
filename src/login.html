@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePass - Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="loginstyle.css">
+</head>
+<body>
+    <div class="login-container animated fadeIn">
+        <div class="login-header">
+            <h1>SafePass</h1>
+            <p>College Movement Management System</p>
+        </div>
+        <div class="login-form">
+            <div class="form-group">
+                <label class="form-label">Select Your Role</label>
+                <div class="role-selector">
+                    <div class="role-option" data-role="student" onclick="selectRole(this)">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Student</span>
+                    </div>
+                    <div class="role-option" data-role="faculty" onclick="selectRole(this)">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Faculty</span>
+                    </div>
+                    <div class="role-option" data-role="warden" onclick="selectRole(this)">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Warden</span>
+                    </div>
+                    <div class="role-option" data-role="security" onclick="selectRole(this)">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Security</span>
+                    </div>
+                </div>
+            </div>
+
+        
+            <form id="loginForm">
+                <input type="hidden" id="roleInput" name="role" value="">
+                <div class="form-group">
+                    <label class="form-label" for="username">Username / ID</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username or ID" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div class="forgot-password">
+                <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+            </div>
+            <div id="forgotPasswordModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Reset Password</h2>
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label class="form-label" for="forgotUsername">Username / ID</label>
+                            <input type="text" class="form-control" id="forgotUsername" name="username" placeholder="Enter your username or ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="forgotRole">Your Role</label>
+                            <select class="form-control" id="forgotRole" name="role" required>
+                                <option value="">Select Role</option>
+                                <option value="student">Student</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="warden">Warden</option>
+                                <option value="security">Security</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Send OTP</button>
+                    </form>
+                </div>
+            </div>
+            <div id="otpModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>OTP Verification</h2>
+                    <p>We've sent an OTP to your registered mobile number</p>
+                    <form id="otpForm">
+                        <div class="form-group">
+                            <label class="form-label" for="otp">Enter OTP</label>
+                            <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter 6-digit OTP" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="newPassword">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password" required>
+                        </div>
+                        <button type="submit" class="btn">Reset Password</button>
+                    </form>
+                </div>
+            </div>
+            <div class="separator">
+                <span>New to SafePass?</span>
+            </div>
+            <div class="register-link">
+                <a href="#">Register for an account</a>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

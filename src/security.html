@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePass - College Movement Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="security.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="716358917phplzQZEc-removebg-preview.png" alt="College Logo">
+                <div class="logo-text">
+                    <h1>SafePass</h1>
+                    <p>College Movement Management System</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <img src="profile-placeholder.jpg" alt="User Profile">
+                <span class="user-name"></span>
+                <span class="user-role"></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="dashboard">
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="#" onclick="filterRequests()" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="#" onclick="filterRequests('Approved')"><i class="fas fa-check-circle"></i> Approved Passes</a></li>
+                        <li><a href="#" onclick="filterRequests('Rejected')"><i class="fas fa-times-circle"></i> Rejected Requests</a></li>
+                        <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+
+                <div class="content">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="totalRequests">0</h3>
+                                <p>Total Requests</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="approvedRequests">0</h3>
+                                <p>Approved</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="pendingRequests">0</h3>
+                                <p>Pending</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="rejectedRequests">0</h3>
+                                <p>Rejected</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Recent Movement Requests</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="recent-requests">
+                                <thead>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date</th>
+                                        <th>Time Out</th>
+                                        <th>Expected Return</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                   <!-- <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Active Passes</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Pass ID</th>
+                                        <th>Destination</th>
+                                        <th>Time Out</th>
+                                        <th>Expected Return</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="active-passes-body"></tbody>
+                            </table>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+                <p class="copyright">© 2025 SafePass - College Movement Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ePassModal" class="modal">
+        <div class="modal-content animate-fadeIn">
+            <div class="modal-header">
+                <h2 class="modal-title">SafePass - Digital Movement Pass</h2>
+                <button class="modal-close" onclick="closeEPassModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="ePassDetails">
+                    <!-- e-Pass details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEPassModal()">Close</button>
+                <button class="btn btn-success" onclick="window.print()">Print Pass</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="security.js"></script>
+</body>
+</html>

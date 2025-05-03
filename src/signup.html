@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePass - Student Sign Up</title>
+    <link rel="stylesheet" href="Signup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SafePass</h1>
+            <p>College Movement Management System</p>
+        </div>
+        
+        <div class="content">
+            <h2>Student Registration</h2>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="number">Phone Number</label>
+                    <input type="number" id="number" name="number" placeholder="Enter your Phone Number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" name="studentId" placeholder="Enter your ID number" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="Civil">Civil</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Chemical">Chemical</option>
+                        <option value="Biotechnology">Biotechnology</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passoutYear">Passout Year</label>
+                    <input type="number" id="passoutYear" name="passoutYear" 
+                           placeholder="Enter your expected passout year" 
+                           min="2023" max="2030" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="btn">Register</button>
+            </form>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            
+            if (!passwordRegex.test(password)) {
+                alert("Invalid password! Must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            // Validate phone number (10-digit)
+            const phoneNumber = document.getElementById("number").value;
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                alert("Invalid phone number! It must be a 10-digit number.");
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                role: 'student', // Hardcoded as student
+                fullName: document.getElementById('fullName').value,
+                number: phoneNumber,
+                studentId: document.getElementById('studentId').value,
+                password: password,
+                department: document.getElementById('department').value,
+                passoutYear: document.getElementById('passoutYear').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (data.message === 'User registered successfully!') {
+                    alert("Registration successful!");
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

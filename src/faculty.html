@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePass -Faculty Dashboard</title>
+    <link href="warden.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>SafePass</h2>
+                <p>College Movement Management</p>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="user-name"></h3>
+                <p class="user-role"></p>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <!-- Changed "Leave Requests" to "Approved Today" -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-check-circle"></i> Approved Today
+                    </a>
+                </li>
+                <!-- Changed "Notifications" to "Rejected Today" -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-times-circle"></i> Rejected Today
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog"></i> Profile Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="student.html" class="nav-link">
+                        <a href="#" id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content" id="main-content">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+            </nav>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <h1 class="page-title">Faculty Dashboard</h1>
+
+                <!-- Stats Container -->
+                <!-- Replace the existing stats-container with this: -->
+<div class="stats-container">
+    <div class="stat-card total-requests">
+        <div class="stat-icon pass-bg">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="totalRequests">0</h3>
+            <p>Total Requests</p>
+        </div>
+    </div>
+    <div class="stat-card approved-requests">
+        <div class="stat-icon student-bg">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="approvedRequests">0</h3>
+            <p>Approved</p>
+        </div>
+    </div>
+    <div class="stat-card rejected-requests">
+        <div class="stat-icon leave-bg">
+            <i class="fas fa-times-circle"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="rejectedRequests">0</h3>
+            <p>Rejected</p>
+        </div>
+    </div>
+    <div class="stat-card pending-requests">
+        <div class="stat-icon class-bg">
+            <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="stat-info">
+            <h3 id="pendingRequests">0</h3>
+            <p>Pending</p>
+        </div>
+    </div>
+</div>
+
+                <div class="card-container">
+                    <!-- Pending Approvals Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Approvals</h3>
+                            <button class="action-btn btn-view">View All</button>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Type</th>
+                                        <th>Destination</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>John Smith</td>
+                                        <td>Leave Request</td>
+                                        <td>Mar 2, 2025</td>
+                                        <td><span class="badge badge-pending">Pending</span></td>
+                                        <td>
+                                            <button class="action-btn btn-view">View</button>
+                                            <button class="action-btn btn-approve">Approve</button>
+                                            <button class="action-btn btn-reject">Reject</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Emily Johnson</td>
+                                        <td>Leave Request</td>
+                                        <td>Mar 2, 2025</td>
+                                        <td><span class="badge badge-pending">Pending</span></td>
+                                        <td>
+                                            <button class="action-btn btn-view">View</button>
+                                            <button class="action-btn btn-approve">Approve</button>
+                                            <button class="action-btn btn-reject">Reject</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Michael Brown</td>
+                                        <td>Leave Request</td>
+                                        <td>Mar 3, 2025</td>
+                                        <td><span class="badge badge-pending">Pending</span></td>
+                                        <td>
+                                            <button class="action-btn btn-view">View</button>
+                                            <button class="action-btn btn-approve">Approve</button>
+                                            <button class="action-btn btn-reject">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Only Calendar remains -->
+                    <div>
+                        <!-- Calendar Card -->
+                        <!-- Replace the calendar card with this: -->
+<div class="card">
+    <div class="card-header">
+        <h3>Calendar</h3>
+    </div>
+    <div class="card-body">
+        <div class="calendar">
+            <div class="calendar-header">
+                <button class="action-btn btn-prev"><i class="fas fa-chevron-left"></i></button>
+                <h4 id="calendar-month">March 2025</h4>
+                <button class="action-btn btn-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-grid" id="calendar-days">
+                <!-- Days will be generated by JavaScript -->
+            </div>
+        </div>
+        <div class="calendar-events" id="calendar-events">
+            <h4>Movements for <span id="selected-date">Select a date</span></h4>
+            <div class="events-container" id="events-container">
+                <p>No movements for selected date</p>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Movement Request Details</h3>
+            <div class="modal-body" id="modalDetailsContent"></div>
+        </div>
+    </div>
+
+    <script src="warden.js"></script>
+</body>
+</html>

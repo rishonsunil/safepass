@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePass - Admin Registration</title>
+    <link rel="stylesheet" href="Signup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SafePass</h1>
+            <p>Admin Registration</p>
+        </div>
+        
+        <div class="content">
+            <h2>Create Admin Account</h2>
+            
+            <div class="role-section">
+                <p>Select Admin Role</p>
+                <div class="role-options">
+                    <div class="role-option" data-role="faculty">
+                        <div class="role-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                            </svg>
+                        </div>
+                        <span class="role-name">Faculty</span>
+                    </div>
+                    
+                    <div class="role-option" data-role="warden">
+                        <div class="role-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                            </svg>
+                        </div>
+                        <span class="role-name">Warden</span>
+                    </div>
+                    
+                    <div class="role-option" data-role="security">
+                        <div class="role-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                            </svg>
+                        </div>
+                        <span class="role-name">Security</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="adminSignupForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="number">Phone Number</label>
+                    <input type="number" id="number" name="number" placeholder="Enter your Phone Number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="employeeId">Employee ID</label>
+                    <input type="text" id="employeeId" name="employeeId" placeholder="Enter your Employee ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" name="department" placeholder="Enter your department" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adminKey">Admin Registration Key</label>
+                    <input type="password" id="adminKey" name="adminKey" placeholder="Enter admin registration key" required>
+                </div>
+                
+                <button type="submit" class="btn">Register</button>
+            </form>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Role selection functionality
+        const roleOptions = document.querySelectorAll('.role-option');
+        let selectedRole = null;
+        const departmentField = document.getElementById('department');
+
+        roleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all options
+                roleOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                this.classList.add('selected');
+                
+                // Store the selected role
+                selectedRole = this.getAttribute('data-role');
+                
+                // Enable/disable department field based on role
+                if (selectedRole === 'faculty') {
+                    departmentField.disabled = false;
+                    departmentField.required = true;
+                    departmentField.placeholder = "Enter your department";
+                } else {
+                    departmentField.disabled = true;
+                    departmentField.required = false;
+                    departmentField.placeholder = "Not applicable for this role";
+                    departmentField.value = "";
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('adminSignupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!selectedRole) {
+                alert('Please select a role.');
+                return;
+            }
+
+            // Verify admin key (this should be more secure in production)
+            const adminKey = document.getElementById('adminKey').value;
+            if (adminKey !== "SAFEPASS_ADMIN_123") { // Replace with a more secure key in production
+                alert("Invalid admin registration key");
+                return;
+            }
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            
+            if (!passwordRegex.test(password)) {
+                alert("Invalid password! Must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, one number, and one special character.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            // Validate phone number (10-digit)
+            const phoneNumber = document.getElementById("number").value;
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                alert("Invalid phone number! It must be a 10-digit number.");
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                role: selectedRole,
+                fullName: document.getElementById('fullName').value,
+                number: phoneNumber,
+                studentId: document.getElementById('employeeId').value,
+                password: password,
+                department: selectedRole === 'faculty' ? document.getElementById('department').value : "N/A",
+                passoutYear: "N/A" // Not applicable for admin roles
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (data.message === 'User registered successfully!') {
+                    alert("Registration successful!");
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
